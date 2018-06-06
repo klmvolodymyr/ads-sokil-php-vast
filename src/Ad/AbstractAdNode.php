@@ -220,6 +220,16 @@ abstract class AbstractAdNode extends AbstractNode
     }
 
     /**
+     * Get previously set impression tracking url value
+     *
+     * @return array
+     */
+    public function getEncodedVideoPublicUrl()
+    {
+        return $this->getValuesOfArrayNode('MediaFile');
+    }
+
+    /**
      * Add extension
      *
      * @param string $type
