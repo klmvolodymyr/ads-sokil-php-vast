@@ -22,7 +22,11 @@ abstract class AbstractLinearCreative extends AbstractNode
     const EVENT_TYPE_START = 'start';
 
     const EVENT_TYPE_CLICK = 'click';
-    
+
+    const EVENT_TYPE_CLOSE = 'close';
+
+    const EVENT_ACCEPT_INVITATION = 'acceptInvitation';
+
     // the creative played for at least 25% of the total duration.
     const EVENT_TYPE_FIRSTQUARTILE = 'firstQuartile';
     
@@ -130,6 +134,8 @@ abstract class AbstractLinearCreative extends AbstractNode
     {
         return array(
             self::EVENT_TYPE_CREATIVEVIEW,
+            self::EVENT_ACCEPT_INVITATION,
+            self::EVENT_TYPE_CLOSE,
             self::EVENT_TYPE_START,
             self::EVENT_TYPE_CLICK,
             self::EVENT_TYPE_FIRSTQUARTILE,
