@@ -294,9 +294,9 @@ abstract class AbstractAdNode extends AbstractNode
     }
 
     /**
-     * Add ad weight
+     * Add ad CTA
      *
-     * @param string $weight
+     * @param string $parameters
      *
      * @return $this
      */
@@ -324,6 +324,36 @@ abstract class AbstractAdNode extends AbstractNode
                 $CTADomElement->appendChild($parameterDomElement);
                 $parameterDomElement->textContent = $parameter;
         }
+
+        return $this;
+    }
+
+    /**
+     * Add ad PixelTracking
+     *
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function addPixelTracking($url)
+    {
+        // get container
+        if (!$this->extensionsDomElement) {
+            // get extensions tag
+            $this->extensionsDomElement = $this->adDomElement->getElementsByTagName('Extensions')->item(0);
+            if (!$this->extensionsDomElement) {
+                $this->extensionsDomElement = $this->adDomElement->ownerDocument->createElement('Extensions');
+                $this->getDomElement()->appendChild($this->extensionsDomElement);
+            }
+        }
+
+        $extensionDomElement = $this->extensionsDomElement->ownerDocument->createElement('Extension');
+        $this->extensionsDomElement->appendChild($extensionDomElement);
+
+        $pixelTrackingDomElement = $extensionDomElement->ownerDocument->createElement('PixelTracking');
+        $extensionDomElement->appendChild($pixelTrackingDomElement);
+
+        $pixelTrackingDomElement->textContent = $url;
 
         return $this;
     }

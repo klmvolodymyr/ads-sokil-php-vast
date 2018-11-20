@@ -20,6 +20,21 @@ class InLine extends AbstractAdNode
         return $this;
     }
 
+
+    /**
+     * Set Ad description
+     *
+     * @param string $value
+     *
+     * @return \Sokil\Vast\Ad\InLine
+     */
+    public function setDescription($value)
+    {
+        $this->setScalarNodeCdata('Description', $value);
+
+        return $this;
+    }
+
     /**
      * @inheritdoc
      */
