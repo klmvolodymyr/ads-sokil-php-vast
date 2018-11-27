@@ -320,9 +320,14 @@ abstract class AbstractAdNode extends AbstractNode
         $extensionDomElement->appendChild($CTADomElement);
 
         foreach ($parameters as $key => $parameter) {
-                $parameterDomElement = $CTADomElement->ownerDocument->createElement($key);
-                $CTADomElement->appendChild($parameterDomElement);
-                $parameterDomElement->textContent = $parameter;
+
+            // create ClickTracking
+            $parameterDomElement = $CTADomElement->ownerDocument->createElement($key);
+            $CTADomElement->appendChild($parameterDomElement);
+
+            // create cdata
+            $cdata = $this->getDomElement()->ownerDocument->createCDATASection($parameter);
+            $parameterDomElement->appendChild($cdata);
         }
 
         return $this;
