@@ -334,6 +334,46 @@ abstract class AbstractAdNode extends AbstractNode
     }
 
     /**
+     * Add ad CTA
+     *
+     * @param string $parameters
+     *
+     * @return $this
+     */
+    public function addTitleCTA($parameters)
+    {
+
+        // get container
+        if (!$this->extensionsDomElement) {
+            // get extensions tag
+            $this->extensionsDomElement = $this->adDomElement->getElementsByTagName('Extensions')->item(0);
+            if (!$this->extensionsDomElement) {
+                $this->extensionsDomElement = $this->adDomElement->ownerDocument->createElement('Extensions');
+                $this->getDomElement()->appendChild($this->extensionsDomElement);
+            }
+        }
+
+        $extensionDomElement = $this->extensionsDomElement->ownerDocument->createElement('Extension');
+        $this->extensionsDomElement->appendChild($extensionDomElement);
+
+        $CTADomElement = $extensionDomElement->ownerDocument->createElement('TitleCTA');
+        $extensionDomElement->appendChild($CTADomElement);
+
+        foreach ($parameters as $key => $parameter) {
+
+            // create ClickTracking
+            $parameterDomElement = $CTADomElement->ownerDocument->createElement($key);
+            $CTADomElement->appendChild($parameterDomElement);
+
+            // create cdata
+            $cdata = $this->getDomElement()->ownerDocument->createCDATASection($parameter);
+            $parameterDomElement->appendChild($cdata);
+        }
+
+        return $this;
+    }
+
+    /**
      * Add ad PixelTracking
      *
      * @param string $url
