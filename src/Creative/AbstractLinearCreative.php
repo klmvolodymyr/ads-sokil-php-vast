@@ -286,7 +286,7 @@ abstract class AbstractLinearCreative extends AbstractNode
     public function addTrackingEvent($event, $url)
     {
         if (!in_array($event, $this->getEventList())) {
-            throw new \Exception(sprintf('Wrong event "%s" specified', $event));
+            return $this;
         }
         
         // create Tracking
